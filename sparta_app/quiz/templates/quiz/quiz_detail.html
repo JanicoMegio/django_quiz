@@ -1,0 +1,27 @@
+{% extends 'landing/base.html' %}
+{% load i18n %}
+{% block title %}
+{{ quiz.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4 mb-5 pb-5">
+  <h1>{{ quiz.title }}</h1>
+  <h2>{% trans "Category" %}: {{ quiz.category }}</h2>
+  <a href="{% url 'quiz_index'%}" class="btn btn-sm btn-secondary "><i class="bi bi-arrow-bar-left"></i> {% trans "Back"%}</a>
+  {% if quiz.single_attempt %}
+    <h4>{% trans "You will only get one attempt at this quiz" %}.</h4>
+  {% endif %}
+  {% if quiz.slides %}
+  <div class="container mt-2">
+    {{quiz.slides|safe}}
+  </div>
+  {% endif %}
+  <p>{{ quiz.description|linebreaks }}</p>
+  <p>
+    <a href="{% url 'quiz_question' quiz_name=quiz.url %}" class="btn btn-warning">
+    {% trans "Start Quiz" %}
+    </a>
+  </p>
+</div>
+{% endblock %}
