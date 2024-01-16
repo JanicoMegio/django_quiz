@@ -1,9 +1,10 @@
 from django.urls import path, include
-from . import views
+from .views import RegisterView, IndexView
 
 urlpatterns = [
-    path('', views.index, name="index"),
-    path('second', include('quiz.urls')),
+    path('', IndexView.as_view(), name="index"),
+    path('Register', RegisterView.as_view(), name="register"),
+    path('TakeExam', include('quiz.urls')),
 ]
 
 

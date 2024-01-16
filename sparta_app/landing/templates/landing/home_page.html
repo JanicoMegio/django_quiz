@@ -10,11 +10,19 @@
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris.<p>
         <a href="{% url 'quiz_index' %}" class="btn btn-dark">Take the exam</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Register
+        </button>
       </div>
       <div class="col-md-6">
         <img src="{% static 'images/undraw_safe_re_kiil.svg'%}" alt="Image" class="img-fluid">
       </div>
     </div>
   </div>
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      {% include "landing/register.html" %}
+    </div>
+  </div>  
 <footer class="footer text-center text-muted py-3">&copy; 2024 Sparta IT Department All rights reserved.</footer>
 {% endblock %}

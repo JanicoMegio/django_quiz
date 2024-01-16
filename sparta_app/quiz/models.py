@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
+
 import re
 import json
 
 from django.db import models
+from django.db.models import F
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.validators import (
     MaxValueValidator, validate_comma_separated_integer_list,
@@ -330,15 +332,28 @@ class SittingManager(models.Manager):
             question_set = question_set[:quiz.max_questions]
 
         questions = ",".join(map(str, question_set)) + ","
+        
+        # start here reset the attempt if passed the prev and continue increment if not
 
+        latest_sitting = Sitting.objects.filter(user=user, quiz=quiz).order_by('-id').first()
+
+        user_attempt_value = 1 if not latest_sitting else latest_sitting.user_attempt + 1
+        
+        if latest_sitting and latest_sitting.check_if_passed:
+            user_attempt_value = 1
+        
+        # end here
+        
         new_sitting = self.create(user=user,
                                   quiz=quiz,
                                   question_order=questions,
                                   question_list=questions,
                                   incorrect_questions="",
                                   current_score=0,
+                                  user_attempt=user_attempt_value,
                                   complete=False,
                                   user_answers='{}')
+        
         return new_sitting
 
     def user_sitting(self, user, quiz):
@@ -397,6 +412,10 @@ class Sitting(models.Model):
         validators=[validate_comma_separated_integer_list])
 
     current_score = models.IntegerField(verbose_name=_("Current Score"))
+    
+    user_attempt = models.IntegerField(default=0, verbose_name=_("Attempt"))
+    
+    user_passed = models.BooleanField(default=False, verbose_name=_("Passed?"))
 
     complete = models.BooleanField(default=False, blank=False,
                                    verbose_name=_("Complete"))
@@ -495,14 +514,17 @@ class Sitting(models.Model):
         self.incorrect_questions = ','.join(map(str, current))
         self.add_to_score(1)
         self.save()
-
+    
     @property
     def check_if_passed(self):
         return self.get_percent_correct >= self.quiz.pass_mark
 
+    
     @property
     def result_message(self):
-        if self.check_if_passed:
+        if self.get_percent_correct >= self.quiz.pass_mark:
+            self.user_passed = True
+            self.save()
             return self.quiz.success_text
         else:
             return self.quiz.fail_text

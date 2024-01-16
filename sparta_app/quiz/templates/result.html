@@ -58,11 +58,13 @@
     </a>
   </p>
   {% else %}
+  <h5>Attempt: {{ sitting.user_attempt }}</h5>
   <p>
-    <a href="{% url 'quiz_start_page' slug=quiz.url %}" class="btn btn-danger">
+    <a href="{% url 'quiz_index' %}" class="btn btn-danger">
       {% trans "RETAKE"%}
     </a>
   </p>
+
   <p>{% trans "Review the questions below and try the exam again in the future"%}. <a href="{% url 'quiz_index' %}">return to home</a></p>
   {%endif%}
   {% if user.is_authenticated %}
@@ -82,31 +84,5 @@
   <hr>
 
   {% endif %}
-
-  {% if questions %}
-
-    {% for question in questions %}
-
-      <p class="lead">
-		{{ question.content }}
-	  </p>
-
-	  {% correct_answer_for_all question %}
-
-      {% if question.user_answer %}
-      <p>{% trans "Your answer" %}: {{ question|answer_choice_to_string:question.user_answer }}</p>
-      {% endif %}
-
-	  <p><strong>{% trans "Explanation" %}:</strong></p>
-	  <div class="well " style="background-color: #fcf8e3;">
-		<p>{{ question.explanation|safe }}</p>
-	  </div>
-
-	  <hr>
-
-  {% endfor %}
-
-  {% endif %}
-
 
 {% endblock %}

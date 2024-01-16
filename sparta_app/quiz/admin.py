@@ -103,8 +103,12 @@ class EssayQuestionAdmin(admin.ModelAdmin):
     filter_horizontal = ('quiz',)
 
 class SittingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'quiz', 'start', 'end', 'complete')
-    readonly_fields = ('start',)
+    list_display = ('user', 'quiz', 'user_attempt', 'complete', 'check_if_passed')
+    readonly_fields = ('user', 'quiz', 'question_order', 'question_list', 'incorrect_questions',
+                       'current_score', 'user_attempt', 'complete', 'user_answers', 'start', 'end')
+    
+    def has_add_permission(self, request):
+        return False
 
 
 admin.site.site_header = 'Sparta administration'
