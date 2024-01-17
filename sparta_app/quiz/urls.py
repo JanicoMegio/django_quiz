@@ -10,7 +10,7 @@ from .views import QuizListView, CategoriesListView, \
 
 urlpatterns = [
 
-    url(r'^$',
+    url(r'^List/$',
         view=QuizListView.as_view(),
         name='quiz_index'),
 
@@ -42,4 +42,5 @@ urlpatterns = [
     url(r'^(?P<quiz_name>[\w-]+)/take/$',
         view=QuizTake.as_view(),
         name='quiz_question'),
+    
 ]

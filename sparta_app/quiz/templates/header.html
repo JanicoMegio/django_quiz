@@ -1,0 +1,14 @@
+{% if messages %}
+<div class="m-6">
+  <div x-data="{ showAlert: true }" x-show="showAlert" x-init="setTimeout(() => showAlert = false, 3000)">
+    <div x-transition:enter="transform ease-out duration-300 transition" x-transition:enter-start="opacity-0 scale-90" x-transition:leave="transform ease-in duration-300 transition" x-transition:leave-end="opacity-0 scale-90">
+      <div class="alert alert-success" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        {% for message in messages %}
+          {{ message|safe }}<br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

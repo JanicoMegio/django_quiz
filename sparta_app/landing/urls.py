@@ -1,11 +1,14 @@
 from django.urls import path, include
-from .views import RegisterView, IndexView, UserLoginView
+from .views import RegisterView, IndexView, UserLoginView, LogoutView
+
+
 
 urlpatterns = [
     path('', IndexView.as_view(), name="index"),
-    path('Register', RegisterView.as_view(), name="register"),
+    path('Signup', RegisterView.as_view(), name="signup"),
     path('Login', UserLoginView.as_view(), name="login"),
-    path('TakeExam', include('quiz.urls')),
+    path('logout',LogoutView.as_view(), name='logout'),
+    path('Quiz', include('quiz.urls')),
 ]
 
 

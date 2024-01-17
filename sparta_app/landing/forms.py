@@ -5,13 +5,13 @@ from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
 
 
 class RegisterUserForm(PopRequestMixin, CreateUpdateAjaxMixin, UserCreationForm):
-    email = forms.EmailField(required=True, help_text="Required.")
+
     first_name = forms.CharField(max_length=30, help_text="Enter your First Name")
     last_name = forms.CharField(max_length=30, help_text="Enter your Last Name")
     
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1']
+        fields = ['first_name', 'last_name', 'username', 'password1']
         
 
 class UserAuthenticationForm(AuthenticationForm):
