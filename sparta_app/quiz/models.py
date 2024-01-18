@@ -92,7 +92,7 @@ class Quiz(models.Model):
                                   )
     
     random_order = models.BooleanField(
-        blank=False, default=False,
+        blank=False, default=True,
         verbose_name=_("Random Order"),
         help_text=_("Display the questions in "
                     "a random order or as they "
@@ -103,10 +103,10 @@ class Quiz(models.Model):
         help_text=_("Number of questions to be answered on each attempt."))
 
     answers_at_end = models.BooleanField(
-        blank=False, default=False,
+        blank=False, default=True,
         help_text=_("Correct answer is NOT shown after question."
-                    " Answers displayed at the end."),
-        verbose_name=_("Answers at end"))
+                    ),
+        verbose_name=_("Not Show Answer"))
 
     exam_paper = models.BooleanField(
         blank=False, default=False,

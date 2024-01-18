@@ -20,7 +20,6 @@ class QuizAdminForm(forms.ModelForm):
     django-admin-interface-using-horizontal-filter-with-
     inline-manytomany-field
     """
-
     class Meta:
         model = Quiz
         exclude = []
@@ -53,6 +52,7 @@ class QuizAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', )
     list_filter = ('category',)
     search_fields = ('description', 'category', )
+   
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -75,7 +75,8 @@ class MCQuestionAdmin(admin.ModelAdmin):
     filter_horizontal = ('quiz',)
 
     inlines = [AnswerInline]
-
+    
+ 
 
 class ProgressAdmin(admin.ModelAdmin):
     """

@@ -1,41 +1,43 @@
-{% extends 'base.html' %}
-{% load i18n %}
-{% block title %}{% trans "All Quizzes" %}{% endblock %}
-{% block nav %}  {% endblock nav %}
-{% block content %}
+{% extends 'base.html' %} {% load i18n %} {% block title %}{% trans "All
+Quizzes" %}{% endblock %} {% block content %}
 <div class="container mx-auto mt-5">
-	{% include 'navbar.html' %}
-	{% include "header.html" %}
-	<h1 class="text-6xl my-4 text-center">List of Quizzes</h1>
-	<div class="flex items-center justify-center">
-		<div class="w-4/5">
-			<hr class="border-t border-gray-700 my-5">
-		</div>
-	</div>
-	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-		{% if quiz_list %}
-		{% for quiz in quiz_list %}
-		<div class="card bg-base-100 shadow-xl">
-			<div class="card-body">
-			  <h1 class="card-title text-2xl">{{quiz.title}}</h1>
-			  <p class="text-lg mb-2 font-bold">{{quiz.category}}</p>
-			  <p>Attempt: {% if quiz.single_attempt %}
-				<span class="font-bold">Single</span>
-						{% else %}
-						<span class="font-bold">Multiple</span>
-						{% endif %}
-			  </p>
-			  <p>Passing Score: <span class="font-bold">78%</span></p>
-			  <p>No.Taken: <span class="font-bold">90</span></p>
-			  <div class="card-actions justify-end">
-				<a href="{% url 'quiz_start_page' slug=quiz.url %}" class="btn btn-primary">View Details</a>
-			  </div>
-			</div>
-		</div>
-		{% endfor %}
-		{% else %}
-			<p class="text-4xl col-span-1 text-center">There are no available quizzes</p>
-		{% endif %}
-	</div>
+  {% include 'navbar.html' %} {% include "header.html" %}
+  <div class="mt-12">
+    {% if quiz_list %} {% for quiz in quiz_list %}
+    <div class="card bg-base-100 shadow-xl mt-3">
+      <div class="card-body">
+        <h1 class="card-title text-4xl">{{quiz.title}}</h1>
+		
+		<span class="text-sm slate-500">By Selvino Taduran II </span>
+        <p class="text-2xl mb-2 font-bold">{{quiz.category}}</p>
+		<p class="text-xl"> The information security awareness assessment has been meticulously crafted by Selvino Taduran II to enhance your understanding of crucial security concepts. 
+			This assessment aims to reinforce best practices and promote a heightened awareness of information security.
+			Selvino has designed the content to ensure its relevance and effectiveness in preparing you to navigate the ever-evolving landscape of digital security. 
+			Your active participation in this assessment is highly encouraged, and we appreciate your commitment to fostering a secure digital environment</p>
+		<hr class="my-4">
+        <p class="text-lg btn">
+          Attempt: {% if quiz.single_attempt %}
+          <span class="font-bold">Single</span>
+          {% else %}
+          <span class="font-bold">Multiple</span>
+          {% endif %}
+        </p>
+        <p class="text-lg btn">Passing Score: <span class="font-bold">{{quiz.pass_mark}}%</span></p>
+        <p class="text-lg btn">No. of Questions: <span class="font-bold ">{{quiz.max_questions}}</span></p>
+        <div class="card-actions justify-end">
+          <a
+            href="{% url 'quiz_start_page' slug=quiz.url %}"
+            class="btn btn-primary text-lg m-3"
+            >Take the Exam</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <p class="text-4xl text-center">
+      There are no available quizzes
+    </p>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
