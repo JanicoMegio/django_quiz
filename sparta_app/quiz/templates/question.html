@@ -1,4 +1,4 @@
-{% extends "landing/base.html" %}
+{% extends "base.html" %}
 {% load i18n%}
 
 {% load quiz_tags %}
@@ -7,54 +7,23 @@
 {% block description %} {{ quiz.title }} - {{ quiz.description }} {% endblock %}
 
 {% block content %}
-
-{% if previous.answers %}
-
-  <p class="muted"><small>{% trans "The previous question" %}:</small></p>
-  <p>{{ previous.previous_question }}</p>
-
-  {% if previous.previous_outcome %}
-	<div class="alert alert-success">
-  {% else %}
-	<div class="alert alert-warning">
-  {% endif %}
-  	  <p><small>
-		{% trans "Your answer was" %} </small>
-		<strong>
-		  {{ previous.previous_outcome|yesno:"correct,incorrect" }}
-		</strong>
-	  </p>
-
-	</div>
-
-	{% include 'correct_answer.html' %}
-
-	<p><strong>{% trans "Explanation" %}:</strong></p>
-	<div class="well " style="background-color: #fcf8e3;">
-	  <p>{{ previous.previous_question.explanation }}</p>
-	</div>
-
-	<hr>
-
-{% endif %}
-
-<br />
-
+<div class="container mx-auto mt-47 shadow-lg p-7 rounded-xl">
 {% if question %}
 
 {% if progress %}
 <div style="float: right;">
+<p class="text-md">
 {% trans "Question" %} {{ progress.0|add:1 }} {% trans "of" %} {{ progress.1 }}
+</p>
 </div>
 {% endif %}
 
-<p>
-  <small class="muted">{% trans "Question category" %}:</small>
-  <strong>{{ question.category }}</strong>
+<p class="mb-4">
+  	<strong class="text-3xl">{{ quiz.title}}</strong>
 </p>
-
-<p class="lead">{{ question.content }}</p>
-
+<hr>
+<p class="text-xl font-medium p-5">Question: {{ question.content }}</p>
+<hr>
 {% if question.figure %}
     <img src="{{ question.figure.url }}" alt="{{ question.content }}" />
 {% endif %}
@@ -65,18 +34,20 @@
   <ul class="list-group">
 
 	{% for answer in form.answers %}
-	  <li class="list-group-item">
+	  <li class="list-group-item p-3 text-xl hover:bg-slate-100">
 	    {{ answer }}
 	  </li>
 	{% endfor %}
 
   </ul>
+  <hr>
   <input type="submit" value={% trans "Confirm" %} class="btn btn-warning btn-block w-100 mt-3">
 </form>
 
 {% endif %}
 
-<hr>
+</div>
+
 
 
 {% endblock %}

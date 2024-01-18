@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 <!DOCTYPE html>
-<html data-theme="dark">
+<html data-theme="light">
 <head>
 <meta charset="utf-8">
 
@@ -14,14 +14,27 @@
 
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/daisyui@1.3.0/dist/full.js"></script>
-    
+
+<style>
+    :root {
+        --my-color: #fff;
+        /* or any other variables/style */
+      }
+      [data-theme='dark'] {
+        --my-color: #000;
+      }
+      [data-theme='pink'] {
+        --my-color: #ffabc8;
+      }
+</style>
 
 </head>
 
 <body>
 <!-- Before the quiz content -->
 
-
+{% block nav %}
+{% endblock nav %}
 
 {% block content %}
 
@@ -29,5 +42,6 @@
 
 <!-- After the quiz content -->
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 </body>
 </html>
