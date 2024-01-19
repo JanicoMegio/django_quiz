@@ -1,4 +1,4 @@
-{% extends "landing/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 
 {% load quiz_tags %}
@@ -9,10 +9,10 @@
 {% block content %}
 
   {% if cat_scores %}
+<div class="container mx-auto">
+  <h1 class="mt-12 text-3xl">{% trans "Question Category Scores" %} <a href="{% url 'quiz_index'%}" class="btn btn-neutral float-end">{% trans "Back"%}</a></h1>
 
-  <h1 class="mt-5">{% trans "Question Category Scores" %} <a href="{% url 'quiz_index'%}" class="btn btn-white border border-dark border-1 float-end"><i class="bi bi-arrow-bar-left"></i> {% trans "Back"%}</a></h1>
-
-  <table class="table table-bordered table-striped">
+  <table class="table">
 
 	<thead>
 	  <tr>
@@ -47,8 +47,8 @@
 
   <hr>
 
-  <h1>{% trans "Previous exam papers" %}</h1>
-  <p class="lead">
+  <h1 class="text-2xl my-5">{% trans "Previous exam papers" %}</h1>
+  <p class="lead text-3xl my-2 text-slate-600">
 	{% trans "Below are the results of exams that you have sat." %}
   </p>
 
@@ -82,5 +82,5 @@
 
   {% endif %}
 
-
+</div>
 {% endblock %}
