@@ -23,6 +23,7 @@
 <p class="text-xl font-medium p-5">Question: {{ question.content }}</p>
 <hr>
 {% if question.figure %}
+    <p>{{ question.figure.url }}</p>
     <img src="{{ question.figure.url }}" alt="{{ question.content }}" />
 {% endif %}
 

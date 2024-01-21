@@ -7,9 +7,9 @@
 
 <title>{% trans "Sparta App" %} | {% block title %}{% endblock %}</title>
 <meta name="description" content="{% block description %}{% endblock %}">
-
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 <!-- styles -->
-
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -25,10 +25,7 @@
 
 {% endblock %}
 
-{% block footer %}
-
-{% endblock footer %}
-<!-- After the quiz content -->
 <script src="https://cdn.tailwindcss.com"></script>
+<!-- After the quiz content -->
 </body>
 </html>

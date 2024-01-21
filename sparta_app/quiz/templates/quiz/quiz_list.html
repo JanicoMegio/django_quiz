@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block title %}All
 Quizzes{% endblock %} {% block content %}
-<div class="container mx-auto mt-5">
+<div class="container mx-auto mt-5 min-h-screen">
   {% include 'navbar.html' %} {% include "header.html" %}
   <div class="mt-12">
     {% if quiz_list %} {% for quiz in quiz_list %}
@@ -8,7 +8,7 @@ Quizzes{% endblock %} {% block content %}
       <div class="card-body">
         <h1 class="card-title text-4xl">{{quiz.title}}</h1>
 		
-		<span class="text-sm slate-500">By Selvino Taduran II </span>
+		<span class="text-sm slate-500">By Selvino T. Taduran II, ECE IT Officer - Sparta</span>
         <p class="text-2xl mb-2 font-bold">{{quiz.category}}</p>
 		<p class="text-xl"> The information security awareness assessment has been meticulously crafted by Selvino Taduran II to enhance your understanding of crucial security concepts. 
 			This assessment aims to reinforce best practices and promote a heightened awareness of information security.
@@ -40,4 +40,5 @@ Quizzes{% endblock %} {% block content %}
     {% endif %}
   </div>
 </div>
+{% include 'footer.html'%}
 {% endblock %}

@@ -20,6 +20,7 @@ for" %} {{ quiz.title }} {% endblock %}
   {% endif %} 
 
   {% if check_retake %}
+  <h5 class="text-3xl text-center w-100 text-slate-500">After <span class="text-3xl">{{ sitting.user_attempt }} attemps, You passed!</span></h5>
   <div class="flex items-center justify-center">
     <a href="{% url 'quiz_index'%}" class="btn btn-success btn-lg m-5">
       {% trans "FINISH"%}

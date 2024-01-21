@@ -7,6 +7,8 @@ from .views import QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 
@@ -43,4 +45,4 @@ urlpatterns = [
         view=QuizTake.as_view(),
         name='quiz_question'),
     
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

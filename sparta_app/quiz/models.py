@@ -88,7 +88,7 @@ class Quiz(models.Model):
     slides = models.TextField(
         blank=True, null=True,
         verbose_name=_("Slides Link"),
-        help_text=_("Copy the Embed link")
+        help_text=_("Copy the Embed link. only inside of iframe block")
                                   )
     
     random_order = models.BooleanField(
